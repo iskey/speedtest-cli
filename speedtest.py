@@ -1880,15 +1880,16 @@ def shell():
 
 
 def main():
-    try:
-        shell()
-    except KeyboardInterrupt:
-        printer('\nCancelling...', error=True)
-    except (SpeedtestException, SystemExit):
-        e = get_exception()
-        # Ignore a successful exit, or argparse exit
-        if getattr(e, 'code', 1) not in (0, 2):
-            raise SystemExit('ERROR: %s' % e)
+    while True:
+        try:
+            shell()
+        except KeyboardInterrupt:
+            printer('\nCancelling...', error=True)
+        except (SpeedtestException, SystemExit):
+            e = get_exception()
+            # Ignore a successful exit, or argparse exit
+            if getattr(e, 'code', 1) not in (0, 2):
+                raise SystemExit('ERROR: %s' % e)
 
 
 if __name__ == '__main__':
